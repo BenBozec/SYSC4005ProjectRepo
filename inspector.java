@@ -11,23 +11,23 @@ public class inspector {
         isBlocked = false;
     }
 
-    public getID(){
+    public int getID(){
         return ID;
     }
 
-    public setID(int ID){
+    public void setID(int ID){
         this.ID = ID;
     }
 
-    public getBlocked(){
+    public boolean getBlocked(){
         return isBlocked;
     }
 
-    public setBlocked(boolean isBlocked){
+    public void setBlocked(boolean isBlocked){
         this.isBlocked = isBlocked;
     }
 
-    public getCurrComponment(){
+    public componentType getCurrComponment(){
         return currComponent;
     }
 

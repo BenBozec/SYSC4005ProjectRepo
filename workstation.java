@@ -5,7 +5,7 @@ public class workstation{
 
     public workstation(int ID){
         this.ID = ID;
-        this.isWaiting = false;
+        this.isWaiting = true;
     }
 
     public int getID() {
@@ -16,7 +16,7 @@ public class workstation{
         this.ID = ID;
     }
 
-    public getWaiting(){
+    public boolean getWaiting(){
         return isWaiting;
     }
 
