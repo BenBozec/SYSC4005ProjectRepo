@@ -1,13 +1,13 @@
 import java.util.*;
 
-public class Event() implements Comparable<Event>{
+public class Event implements Comparable<Event>{
 
     /*Events:   I1C = Inspector 1 has finished processing
                 I2C = Inspector 2 has finished processing
                 WC  = A workstation has finished processing
      */
-    private static enum eventType {I1C, I2C, WC}
-    private int time;
+    public static enum eventType {I1C, I2C, WC}
+    private Integer time;
     private eventType type;
     private Object subject; //Variable type object to accept both inspector and workstation objects
 
@@ -22,7 +22,7 @@ public class Event() implements Comparable<Event>{
         return this.getTime().compareTo(ev.getTime());
     }
 
-    public int getTime(){
+    public Integer getTime(){
         return time;
     }
 
