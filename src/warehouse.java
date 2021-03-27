@@ -15,8 +15,8 @@ public class warehouse{
     public static Random rnd;
     
     //figure out what these are for
-    private static double BL, BS;                                           // Total busy time for the two loaders and the scale, respectively
-    private static double UL, US;                                           // Utilization for the two loaders and the scale, respectively
+    private static double Bi1,Bi2;
+    private static int P1, P2, P3 ;                                         // Utilization for the two loaders and the scale, respectively
     
     private static void initialization(){
         //Initialize the statistic tracking variables and clock
@@ -31,11 +31,12 @@ public class warehouse{
         bufferC2Workstation2 = 0;
         bufferC1Workstation3 = 0;
         bufferC3Workstation3 = 0;
-        
-        BL = 0.0;
-        BS = 0.0;
-        UL = 0.0;
-        US = 0.0;
+
+        Bi1=0.0;
+        Bi2= 0.0;
+        P1=0;
+        P2=0;
+        P3=0;
         
         rnd = new Random();
         //Initialize the 2 inspectors and the 3 workstations
@@ -53,12 +54,54 @@ public class warehouse{
         //Initialize RNG for inspector 2
 
         //Initialize FEL and workstation buffers
+        FEL = new PriorityQueue<>();
 
         initialization();
-
         //Work through FEL queue and process the events as they appear
+        System.out.print("\n-----------------------------------------------\n");
+        System.out.print(" Time " + ":D" + "\n");
+        while (((P1 + P2 + P3) <= 300) && !(FEL.isEmpty())) {
+            Event ProcessEvent = FEL.poll();
+            if (ProcessEvent != null) {
+                Clock = ProcessEvent.getTime();
+                System.out.print("Clock = " + Clock);
+                ProcessEvent(ProcessEvent);
 
-        //Print out desired data. (System Throughput and Inspector Idle time proportions)
+            }
+            GenerateReport();
+
+
+            //Print out desired data. (System Throughput and Inspector Idle time proportions)
+        }
+
+
+    }
+
+    private static void GenerateReport() {
+        int P_1, P_2, P_3, sum, Temp1, temp2;
+        P_1=(P1/Clock);
+        P_2=(P2/Clock);
+        P_3=(P3/Clock);
+
+        sum=(P_1 +P_2+P_3);
+
+        Temp1=(Bi1/Clock)*100;
+        temp2=(Bi2/Clock)*100;
+
+
+
+
+
+        System.out.print("\n-----------------------------------------------------------\n");
+        System.out.print("Statistics\n");
+        System.out.print(" PRODUCT 1 = " + P_1 + "\n");
+        System.out.print(" PRODUCT 2 " + P_2 + "\n");
+        System.out.print(" PRODUCT 3 " + P_3+ "\n");
+        System.out.print(" Total through put of the system  " + sum + "\n");
+        System.out.print(" Idle percentage time for inspector 1 " + Temp1 + "\n");
+        System.out.print(" Idle percentage time for inspector 2  " + temp2 "\n");
+
+
     }
 
     private static void ProcessI1C(Event e){
