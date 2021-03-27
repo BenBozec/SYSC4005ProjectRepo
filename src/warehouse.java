@@ -17,10 +17,10 @@ public class warehouse{
     public static workstation w1;
     public static workstation w2;
     public static workstation w3;
-    
+
     //Statistic metrics for Inspector blocked times and product output
-    private static double BI1, BI2;                                           // Total busy time for the two loaders and the scale, respectively
-    private static int P1, P2, P3;                                           // Utilization for the two loaders and the scale, respectively
+    private static double BI1, BI2;                                           // Total idle time for the two inspectors
+    private static int P1, P2, P3;                                           // Products completed per workstation
     
     private static void initialization(){
         //Initialize the statistic tracking variables and clock
@@ -61,18 +61,13 @@ public class warehouse{
         FEL = new PriorityQueue<>();
 
         initialization();
-
         //Work through FEL queue and process the events as they appear
+
         while (((P1 + P2 + P3) < 300) && !(FEL.isEmpty())) {
             Event ProcessEvent = FEL.poll();
             if (ProcessEvent != null) {
                 Clock = ProcessEvent.getTime();
                 System.out.print("Clock = " + Clock + ", Next Event => " + ProcessEvent.getType() + "\n");
-                System.out.print(bufferC1Workstation1 + "\n");
-                System.out.print(bufferC1Workstation2 + "\n");
-                System.out.print(bufferC2Workstation2 + "\n");
-                System.out.print(bufferC1Workstation3 + "\n");
-                System.out.print(bufferC3Workstation3 + "\n");
                 ProcessEvent(ProcessEvent);
 
             }
@@ -85,7 +80,6 @@ public class warehouse{
         }
         //Print out desired data. (System Throughput and Inspector Idle time proportions)
         GenerateReport();
-
     }
 
     private static void GenerateReport() {
