@@ -2,9 +2,42 @@ import java.util.*;
 
 public class warehouse{
 
+    public static int Clock; // ask TA what is the stop time or date.
+    public static int inspector1IDLE, inspector2IDLE;
+    private static Queue<Event> FEL;
+    
+    public static int bufferC1Workstation1;
+    public static int bufferC1Workstation2;
+    public static int bufferC2Workstation2;
+    public static int bufferC1Workstation3;
+    public static int bufferC3Workstation3;
+    
+    public static Random rnd;
+    
+    //figure out what these are for
+    private static double BL, BS;                                           // Total busy time for the two loaders and the scale, respectively
+    private static double UL, US;                                           // Utilization for the two loaders and the scale, respectively
+    
     private static void initialization(){
         //Initialize the statistic tracking variables and clock
-
+        //Initialize the statistic tracking variables and clock
+        Clock = 0;
+        
+        inspector1IDLE = 0;
+        inspector2IDLE = 0;
+        
+        bufferC1Workstation1 = 0;
+        bufferC1Workstation2 = 0;
+        bufferC2Workstation2 = 0;
+        bufferC1Workstation3 = 0;
+        bufferC3Workstation3 = 0;
+        
+        BL = 0.0;
+        BS = 0.0;
+        UL = 0.0;
+        US = 0.0;
+        
+        rnd = new Random();
         //Initialize the 2 inspectors and the 3 workstations
         inspector i1 = new inspector(1);
         inspector i2 = new inspector(2);
