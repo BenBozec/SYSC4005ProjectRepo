@@ -7,11 +7,11 @@ public class Event implements Comparable<Event>{
                 WC  = A workstation has finished processing
      */
     public static enum eventType {I1C, I2C, WC}
-    private Integer time;
+    private Double time;
     private eventType type;
     private Object subject; //Variable type object to accept both inspector and workstation objects
 
-    public Event(int time, eventType type, Object subject){
+    public Event(double time, eventType type, Object subject){
         this.time = time;
         this.type = type;
         this.subject = subject;
@@ -22,11 +22,11 @@ public class Event implements Comparable<Event>{
         return this.getTime().compareTo(ev.getTime());
     }
 
-    public Integer getTime(){
+    public Double getTime(){
         return time;
     }
 
-    public void setTime(int time){
+    public void setTime(double time){
         this.time = time;
     }
 
